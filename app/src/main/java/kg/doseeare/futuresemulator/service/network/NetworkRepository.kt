@@ -1,5 +1,5 @@
 package kg.doseeare.futuresemulator.service.network
 
-class NetworkRepository {
+import androidx.core.util.Consumer
 
-}
+class NetworkRepository

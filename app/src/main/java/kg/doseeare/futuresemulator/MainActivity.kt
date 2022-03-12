@@ -1,23 +1,21 @@
 package kg.doseeare.futuresemulator
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kg.doseeare.futuresemulator.base.BaseActivity
 import kg.doseeare.futuresemulator.databinding.ActivityMainBinding
+import kg.doseeare.futuresemulator.service.network.NetworkRepository
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(ActivityMainBinding.inflate(layoutInflater))
 
         val navView: BottomNavigationView = binding.navView
 
