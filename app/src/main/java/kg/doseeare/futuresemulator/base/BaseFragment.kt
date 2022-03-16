@@ -6,29 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
-abstract class BaseFragment<B : ViewBinding> : Fragment() {
-    private var viewBinding: B? = null
+typealias Inflate<outVB> = (LayoutInflater, ViewGroup?, Boolean) -> outVB
 
-    protected val binding: B
-        get() = checkNotNull(viewBinding)
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(
+    private val inflate: Inflate<VB>,
+    viewModelClass: KClass<VM>
+) : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = onInflateView(inflater, container)
-        viewBinding = binding
+    private var _binding: VB? = null
+    protected val binding get() = _binding!!
+    protected val viewModel: VM by viewModel(viewModelClass)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = inflate.invoke(inflater, container, false)
         return binding.root
     }
 
     override fun onDestroyView() {
-        viewBinding = null
         super.onDestroyView()
+        _binding = null
     }
-
-    protected fun bidingOrNull() = viewBinding
-
-    protected abstract fun onInflateView(inflater: LayoutInflater, container: ViewGroup?): B
 }
