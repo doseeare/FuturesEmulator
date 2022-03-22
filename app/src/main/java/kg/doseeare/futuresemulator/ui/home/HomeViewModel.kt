@@ -6,7 +6,5 @@ import androidx.lifecycle.MutableLiveData
 import kg.doseeare.futuresemulator.base.BaseViewModel
 
 class HomeViewModel(app: Application) : BaseViewModel(app) {
-fun dsa (){
-    print("dsa")
-}
+
 }

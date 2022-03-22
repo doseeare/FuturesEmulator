@@ -11,10 +11,17 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     protected fun setContentView(binding: B) {
         viewBinding = binding
         super.setContentView(binding.root)
+        initViews()
+        initObservers()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         viewBinding = null
     }
+
+    abstract fun initViews()
+
+    abstract fun initObservers()
 }
