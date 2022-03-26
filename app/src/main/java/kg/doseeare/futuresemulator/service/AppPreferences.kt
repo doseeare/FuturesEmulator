@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object AppPreferences {
-
     private const val NAME = "FUTURES EMULATOR"
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var preferences: SharedPreferences
